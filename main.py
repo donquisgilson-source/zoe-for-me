@@ -64,11 +64,11 @@ def main(page: ft.Page):
 
     BANCOS_DISPONIBLES = {
         "Banesco": "banesco.png", "BBVA Provincial": "provincial.png", "BNC": "bnc.png",
-        "Bancamiga": "bancamiga.png", "Banco Bicentenario": "bicentenario.png",
+        "Bancamiga": "bancamiga.png","Banco Digital de los Trabajadores": "bdt.png", "Banco Bicentenario": "bicentenario.png",
         "Banco del Tesoro": "tesoro.png", "Bancaribe": "bancaribe.png",
-        "Banco Exterior": "exterior.png", "Banco Activo": "activo.png",
+        "Banco Exterior": "exterior.png","Humaniz Banco": "humanizmain.png","Humaniz Alimentación": "Humanizalim.png", "Banco Activo": "activo.png",
         "Banplus": "banplus.png", "Banco Plaza": "plaza.png", "100% Banco": "cienporciento.png",
-        "Zinli": "zinli.png", "Wally": "wally.png", "Efectivo (Bs)": "efectivobs.png"
+        "Zinli": "zinli.png","Zelle": "Zelle.png", "Wally": "wally.png", "Efectivo (Bs)": "efectivobs.png"
     }
 
     CODIGOS_PAGO_MOVIL = [
@@ -376,7 +376,7 @@ def main(page: ft.Page):
                     ft.Text(f"{simbolo_total} {total_acum:,.2f}", color=COLOR_DORADO, size=46, weight=ft.FontWeight.BOLD),
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER)
 
-            page.views.append(ft.View("/", bgcolor=BG_COLOR, padding=20, controls=[
+            page.views.append(ft.View("/", scroll=ft.ScrollMode.AUTO, bgcolor=BG_COLOR, padding=20, controls=[
                 ft.Column([
                     ft.Container(height=3, bgcolor=COLOR_DORADO, border_radius=2, margin=ft.margin.only(bottom=10)),
                     ft.Row([
@@ -437,7 +437,7 @@ def main(page: ft.Page):
                 page.set_clipboard(texto_copiar)
                 page.open(ft.SnackBar(ft.Text("¡Copiado! Listo para pegar en WhatsApp o el Banco.", color=COLOR_NEGRO_PURO, weight=ft.FontWeight.BOLD), bgcolor=ft.colors.GREEN_400))
 
-            page.views.append(ft.View("/pagomovil", bgcolor=BG_COLOR, padding=20, controls=[
+            page.views.append(ft.View("/pagomovil", scroll=ft.ScrollMode.AUTO, bgcolor=BG_COLOR, padding=20, controls=[
                 ft.Container(height=3, bgcolor=COLOR_DORADO, border_radius=2),
                 ft.AppBar(title=ft.Text("Cobrar Pago Móvil", color=COLOR_DORADO), bgcolor=BG_COLOR, leading=ft.IconButton(ft.icons.ARROW_BACK, icon_color=COLOR_DORADO, on_click=lambda _: page.go("/"))),
                 ft.Text("Tus Datos (Se guardan automáticamente)", color=TXT_PRINC, weight=ft.FontWeight.BOLD),
@@ -475,7 +475,7 @@ def main(page: ft.Page):
             txt_usdt_v = ft.TextField(label="USDT Binance (Venta)", border_color=CAJA_COLOR, focused_border_color=COLOR_DORADO, color=TXT_PRINC, on_change=calcular_inputs, input_filter=filtro)
 
             b_bs = TASAS["USDT_COMPRA"] - TASAS["BCV"]; b_pct = (b_bs / TASAS["BCV"] * 100) if TASAS["BCV"] > 0 else 0
-            page.views.append(ft.View("/calculadora", bgcolor=BG_COLOR, padding=20, controls=[
+            page.views.append(ft.View("/calculadora", scroll=ft.ScrollMode.AUTO, bgcolor=BG_COLOR, padding=20, controls=[
                 ft.Container(height=3, bgcolor=COLOR_DORADO, border_radius=2, margin=ft.margin.only(bottom=10)),
                 ft.AppBar(title=ft.Text("Mercado", color=COLOR_DORADO), bgcolor=BG_COLOR, leading=ft.IconButton(ft.icons.ARROW_BACK, icon_color=COLOR_DORADO, on_click=lambda _: page.go("/"))),
                 ui_fecha_tiempo, ft.Container(height=10),
@@ -558,7 +558,7 @@ def main(page: ft.Page):
                 bgcolor=CAJA_COLOR, padding=15, border_radius=10, border=ft.border.all(1, COLOR_TEMA)
             )
 
-            page.views.append(ft.View("/transaccion", bgcolor=BG_COLOR, padding=20, controls=[
+            page.views.append(ft.View("/transaccion", scroll=ft.ScrollMode.AUTO, bgcolor=BG_COLOR, padding=20, controls=[
                 ft.Container(height=3, bgcolor=COLOR_TEMA, border_radius=2),
                 ft.AppBar(title=ft.Text(banco, color=COLOR_TEMA), bgcolor=BG_COLOR, leading=ft.IconButton(ft.icons.ARROW_BACK, icon_color=COLOR_TEMA, on_click=lambda _: page.go("/"))),
                 tabs, ft.Container(height=10), txt_m, dd_cat, ft.Container(height=10), recuadro_tasas, ft.Container(expand=True),
@@ -608,7 +608,7 @@ def main(page: ft.Page):
             else:
                 controles_editar.extend([ft.Container(expand=True), ft.ElevatedButton("ELIMINAR CUENTA", color=ft.colors.WHITE, bgcolor=ft.colors.RED_700, width=400, on_click=lambda _: page.open(dialog_eliminar))])
 
-            page.views.append(ft.View("/editar", bgcolor=BG_COLOR, padding=20, controls=controles_editar))
+            page.views.append(ft.View("/editar", scroll=ft.ScrollMode.AUTO, bgcolor=BG_COLOR, padding=20, controls=controles_editar))
 
         # --- RUTA 5: HISTORIAL ---
         elif page.route == "/historial":
